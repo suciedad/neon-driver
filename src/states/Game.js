@@ -8,6 +8,9 @@ export default class extends Phaser.State {
   preload() { }
 
   create() {
+    // Arcade physics
+    game.physics.startSystem(Phaser.Physics.ARCADE)
+
     this.road = new Road({
       game: this.game,
       x: this.world.centerX,
