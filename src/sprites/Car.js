@@ -17,13 +17,12 @@ export default class extends Phaser.Sprite {
     // Waiting for player push 'space'
     this.leftKey.onDown.add(this.moveLeft, this);
     this.rightKey.onDown.add(this.moveRight, this);
-    console.warn(this);
   }
 
   moveLeft () {
     if (!this.isMoving && this.carPosition !== "left") {
       this.isMoving = true
-      this.body.velocity.x = -200
+      this.body.velocity.x = -220
       this.game.time.events.add(600, function () {
         this.body.velocity.x = 0
         this.isMoving = false
@@ -38,7 +37,7 @@ export default class extends Phaser.Sprite {
   moveRight () {
     if (!this.isMoving && this.carPosition !== "right") {
       this.isMoving = true
-      this.body.velocity.x = 200
+      this.body.velocity.x = 220
       this.game.time.events.add(600, function () {
         this.body.velocity.x = 0
         this.isMoving = false
