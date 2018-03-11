@@ -9,6 +9,7 @@ export default class extends Phaser.State {
   preload() { }
 
   create() {
+    this.enemyGroup = game.add.group()
     this.roadsPositions = [this.world.centerY - 150, this.world.centerY, this.world.centerY + 150]
 
     // Arcade physics
@@ -26,7 +27,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: this.world.centerX,
       y: this.game.height - 80,
-      asset: 'mushroom'
+      asset: 'car'
     })
     this.game.add.existing(this.car)
 
@@ -48,7 +49,10 @@ export default class extends Phaser.State {
       y: 0,
       asset: 'enemy'
     })
+
     this.game.add.existing(this.enemy)
+    this.enemyGroup.add(this.enemy)
+    console.warn(this.enemyGroup);
   }
 
   update() {
