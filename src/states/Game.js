@@ -2,8 +2,8 @@
 import Phaser from 'phaser'
 import Car from '../sprites/Car'
 import Road from '../sprites/Road'
-import Truck from '../sprites/Truck'
-import Moto from '../sprites/Moto'
+import Truck from '../sprites/enemies/Truck'
+import Moto from '../sprites/enemies/Moto'
 
 export default class extends Phaser.State {
   init() { }
@@ -23,6 +23,13 @@ export default class extends Phaser.State {
       asset: 'road'
     })
     this.game.add.existing(this.road)
+    this.futureRoad = new Road({
+      game: this.game,
+      x: this.world.centerX,
+      y: this.world.centerY-this.game.height,
+      asset: 'road'
+    })
+    this.game.add.existing(this.futureRoad)
 
     this.car = new Car({
       game: this.game,
@@ -68,13 +75,27 @@ export default class extends Phaser.State {
         game: this.game,
         x: pos,
         y: 0,
-        asset: 'car'
+        asset: 'enemy'
       })
     }
   }
 
   update() {
     game.physics.arcade.overlap(this.car, this.enemies, this.collisionHandler, null, this);
+
+    if (this.road.position.y >= (this.world.centerY + this.game.height)) {
+      this.road.kill()
+      this.road = this.futureRoad
+      this.futureRoad = new Road({
+        game: this.game,
+        x: this.world.centerX,
+        y: this.world.centerY - this.game.height,
+        asset: 'road'
+      })
+      this.game.add.existing(this.futureRoad)
+      this.game.world.bringToTop(this.enemies)
+      this.game.world.bringToTop(this.car)
+    }
   }
 
   render() {
