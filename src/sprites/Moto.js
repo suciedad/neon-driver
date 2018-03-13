@@ -11,9 +11,13 @@ export default class extends Phaser.Sprite {
     this.body.immovable = true
     this.anchor.setTo(0.5)
 
+    this.body.velocity.y = 200
   }
 
   update () {
-    this.body.velocity.y = 100
+
+    if (this.position.y > this.game.height+50) {
+      this.parentGroup.remove(this)
+    }
   }
 }
