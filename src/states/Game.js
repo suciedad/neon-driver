@@ -1,9 +1,11 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 import Car from '../sprites/Car'
+import Coin from '../sprites/Coin'
 import Road from '../sprites/Road'
 import Truck from '../sprites/enemies/Truck'
 import Moto from '../sprites/enemies/Moto'
+import Scores from '../components/Scores';
 
 export default class extends Phaser.State {
   init() { }
@@ -11,7 +13,11 @@ export default class extends Phaser.State {
 
   create() {
     this.enemies = game.add.group()
+    this.coins   = game.add.group()
     this.roadsPositions = [this.world.centerY - 150, this.world.centerY, this.world.centerY + 150]
+
+    this.scores = new Scores(game)
+    this.scores.init()
 
     // Arcade physics
     game.physics.startSystem(Phaser.Physics.ARCADE)
@@ -41,15 +47,36 @@ export default class extends Phaser.State {
 
     game.time.events.repeat(Phaser.Timer.SECOND * 2, Infinity, () => {
       let pos = this.roadsPositions[game.rnd.between(0, 2)]
-      console.warn(pos);
       this.createEnemy(pos)
+    }, this);
+    game.time.events.repeat(Phaser.Timer.SECOND * 1, Infinity, () => {
+      let pos = this.roadsPositions[game.rnd.between(0, 2)]
+      this.createCoins(pos)
     }, this);
 
     this.game.world.bringToTop(this.enemies)
+    this.game.world.bringToTop(this.coins)
   }
 
   collisionHandler() {
     console.warn(123);
+  }
+  pickCoin(spriteA, spriteB) {
+    spriteB.kill()
+    this.scores.increase()
+  }
+
+  createCoins(pos) {
+    let coin = new Coin({
+      game: this.game,
+      x: pos,
+      y: 0,
+      asset: 'enemy'
+    })
+
+    this.game.add.existing(coin)
+    this.coins.add(coin)
+    coin.parentGroup = this.coins
   }
 
   createEnemy(pos) {
@@ -82,6 +109,7 @@ export default class extends Phaser.State {
 
   update() {
     game.physics.arcade.overlap(this.car, this.enemies, this.collisionHandler, null, this);
+    game.physics.arcade.overlap(this.car, this.coins, this.pickCoin, null, this);
 
     if (this.road.position.y >= (this.world.centerY + this.game.height)) {
       this.road.kill()
@@ -94,6 +122,7 @@ export default class extends Phaser.State {
       })
       this.game.add.existing(this.futureRoad)
       this.game.world.bringToTop(this.enemies)
+      this.game.world.bringToTop(this.coins)
       this.game.world.bringToTop(this.car)
     }
   }
