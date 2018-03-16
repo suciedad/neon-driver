@@ -22,20 +22,8 @@ export default class extends Phaser.State {
     // Arcade physics
     game.physics.startSystem(Phaser.Physics.ARCADE)
 
-    this.road = new Road({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.centerY,
-      asset: 'road'
-    })
-    this.game.add.existing(this.road)
-    this.futureRoad = new Road({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.centerY-this.game.height,
-      asset: 'road'
-    })
-    this.game.add.existing(this.futureRoad)
+    this.road = new Road(this.game, this.world)
+    this.road.init()
 
     this.car = new Car({
       game: this.game,
@@ -111,20 +99,13 @@ export default class extends Phaser.State {
     game.physics.arcade.overlap(this.car, this.enemies, this.collisionHandler, null, this);
     game.physics.arcade.overlap(this.car, this.coins, this.pickCoin, null, this);
 
-    if (this.road.position.y >= (this.world.centerY + this.game.height)) {
-      this.road.kill()
-      this.road = this.futureRoad
-      this.futureRoad = new Road({
-        game: this.game,
-        x: this.world.centerX,
-        y: this.world.centerY - this.game.height,
-        asset: 'road'
-      })
-      this.game.add.existing(this.futureRoad)
+    if (this.road.chunks.bottom.y >= (this.world.centerY + this.game.height + 100)) {
+      this.road.addChunk()
       this.game.world.bringToTop(this.enemies)
       this.game.world.bringToTop(this.coins)
       this.game.world.bringToTop(this.car)
     }
+
   }
 
   render() {
