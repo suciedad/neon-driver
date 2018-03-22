@@ -105,7 +105,6 @@ export default class extends Phaser.State {
       this.game.world.bringToTop(this.coins)
       this.game.world.bringToTop(this.car)
     }
-
   }
 
   render() {
