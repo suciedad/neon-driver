@@ -1,10 +1,11 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
-import Car from '../sprites/Car'
-import Coin from '../sprites/Coin'
-import Road from '../sprites/Road'
-import Truck from '../sprites/enemies/Truck'
-import Moto from '../sprites/enemies/Moto'
+import go     from '../game_options'
+import Car    from '../sprites/Car'
+import Coin   from '../sprites/Coin'
+import Road   from '../sprites/Road'
+import Truck  from '../sprites/enemies/Truck'
+import Moto   from '../sprites/enemies/Moto'
 import Scores from '../components/Scores';
 
 export default class extends Phaser.State {
@@ -14,7 +15,7 @@ export default class extends Phaser.State {
   create() {
     this.enemies = game.add.group()
     this.coins   = game.add.group()
-    this.roadsPositions = [this.world.centerY - 150, this.world.centerY, this.world.centerY + 150]
+    this.roadsPositions = [go.road.positions.left, go.road.positions.center, go.road.positions.right]
 
     this.scores = new Scores(game)
     this.scores.init()
@@ -33,7 +34,7 @@ export default class extends Phaser.State {
     })
     this.game.add.existing(this.car)
 
-    game.time.events.repeat(Phaser.Timer.SECOND * 2, Infinity, () => {
+    game.time.events.repeat(Phaser.Timer.SECOND * 3, Infinity, () => {
       let pos = this.roadsPositions[game.rnd.between(0, 2)]
       this.createEnemy(pos)
     }, this);

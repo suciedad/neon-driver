@@ -7,7 +7,6 @@ export default class extends Phaser.Sprite {
     this.height = 30
     this.width = 30
     this.speed = 0
-    this.enemyPosition = "center"
 
     this.game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.immovable = true

@@ -1,10 +1,12 @@
 import Phaser from 'phaser'
+import go     from '../game_options'
 
 export default class extends Phaser.Sprite {
   constructor ({ game, x, y, asset }) {
     super(game, x, y, asset)
 
     this.speed       = 0
+    this._turnSpeed  = go.car.turnSpeed
     this.carPosition = "center"
     this.isMoving    = false
 
@@ -24,12 +26,12 @@ export default class extends Phaser.Sprite {
       this.isMoving = true
       if (this.carPosition === "right") {
         this.carPosition = "center"
-        var xCoord = 325
+        var xCoord = go.road.positions.center
       } else if (this.carPosition === "center") {
         this.carPosition = "left"
-        var xCoord = 187
+        var xCoord = go.road.positions.left
       }
-      let tween = this.game.add.tween(this).to({ x: xCoord }, 800, Phaser.Easing.Quartic.Out, true)
+      let tween = this.game.add.tween(this).to({ x: xCoord }, this._turnSpeed, Phaser.Easing.Quartic.Out, true)
 
       tween.onComplete.add(() => { this.isMoving = false }, this)
     }
@@ -39,12 +41,12 @@ export default class extends Phaser.Sprite {
       this.isMoving = true
       if (this.carPosition === "left") {
         this.carPosition = "center"
-        var xCoord = 325
+        var xCoord = go.road.positions.center
       } else if (this.carPosition === "center") {
         this.carPosition = "right"
-        var xCoord = 460
+        var xCoord = go.road.positions.right
       }
-      let tween = this.game.add.tween(this).to({ x: xCoord }, 800, Phaser.Easing.Quartic.Out, true)
+      let tween = this.game.add.tween(this).to({ x: xCoord }, this._turnSpeed, Phaser.Easing.Quartic.Out, true)
 
       tween.onComplete.add(() => {
         this.isMoving = false

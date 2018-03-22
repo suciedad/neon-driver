@@ -5,7 +5,7 @@ export default class extends Phaser.Sprite {
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
 
-    this.maxSpeed = 15
+    this.maxSpeed = 23
   }
 
   update () {
