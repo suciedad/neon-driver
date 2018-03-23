@@ -29,7 +29,7 @@ export default class extends Phaser.State {
     this.car = new Car({
       game: this.game,
       x: this.world.centerX,
-      y: this.game.height - 100,
+      y: this.game.height - 85,
       asset: 'car'
     })
     this.game.add.existing(this.car)
@@ -82,7 +82,7 @@ export default class extends Phaser.State {
       return new Truck({
         game: this.game,
         x: pos,
-        y: 0,
+        y: -201,
         asset: 'truck'
       })
     }

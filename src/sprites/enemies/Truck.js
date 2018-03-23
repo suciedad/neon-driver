@@ -19,7 +19,7 @@ export default class extends Phaser.Sprite {
 
   update () {
 
-    if (this.position.y > this.game.height+50) {
+    if (this.position.y > this.game.height+201) {
       this.parentGroup.remove(this)
     }
   }

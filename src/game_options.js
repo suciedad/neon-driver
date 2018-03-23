@@ -12,6 +12,6 @@ export default {
     }
   },
   car: {
-    turnSpeed: 500
+    turnSpeed: 400
   }
 }

@@ -12,7 +12,7 @@ export default class extends Phaser.Sprite {
     this.body.immovable = true
     this.anchor.setTo(0.5)
 
-    this.body.velocity.y = 350
+    this.body.velocity.y = 450
 
   }
 

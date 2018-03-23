@@ -31,7 +31,7 @@ export default class extends Phaser.Sprite {
         this.carPosition = "left"
         var xCoord = go.road.positions.left
       }
-      let tween = this.game.add.tween(this).to({ x: xCoord }, this._turnSpeed, Phaser.Easing.Quartic.Out, true)
+      let tween = this.game.add.tween(this).to({ x: xCoord }, this._turnSpeed, Phaser.Easing.Sinusoidal.Out, true)
 
       tween.onComplete.add(() => { this.isMoving = false }, this)
     }
@@ -46,7 +46,7 @@ export default class extends Phaser.Sprite {
         this.carPosition = "right"
         var xCoord = go.road.positions.right
       }
-      let tween = this.game.add.tween(this).to({ x: xCoord }, this._turnSpeed, Phaser.Easing.Quartic.Out, true)
+      let tween = this.game.add.tween(this).to({ x: xCoord }, this._turnSpeed, Phaser.Easing.Sinusoidal.Out, true)
 
       tween.onComplete.add(() => {
         this.isMoving = false
