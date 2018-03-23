@@ -48,7 +48,7 @@ export default class extends Phaser.State {
   }
 
   collisionHandler() {
-    console.warn(123);
+    // this.gameOver()
   }
   pickCoin(spriteA, spriteB) {
     spriteB.kill()
@@ -94,6 +94,19 @@ export default class extends Phaser.State {
         asset: 'enemy'
       })
     }
+  }
+
+  gameOver () {
+    // Game Over
+    let style = { font: "bold 48px Arial", fill: "#f28cba" }
+    let gameOverText = game.add.text(this.world.centerX, this.world.centerY, "GAY OVER", style)
+    gameOverText.anchor.x = 0.5
+    gameOverText.anchor.y = 0.5
+    this.game.paused = true
+    this.game.input.onDown.add(() => {
+      this.game.paused = false
+      this.state.restart()
+    }, this)
   }
 
   update() {
