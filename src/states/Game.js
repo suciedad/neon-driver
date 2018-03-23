@@ -83,7 +83,7 @@ export default class extends Phaser.State {
         game: this.game,
         x: pos,
         y: 0,
-        asset: 'enemy'
+        asset: 'truck'
       })
     }
     if (randomKey === 1) {
