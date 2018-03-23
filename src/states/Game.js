@@ -60,7 +60,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: pos,
       y: 0,
-      asset: 'enemy'
+      asset: 'coin'
     })
 
     this.game.add.existing(coin)
