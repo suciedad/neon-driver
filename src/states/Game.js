@@ -90,8 +90,8 @@ export default class extends Phaser.State {
       return new Moto({
         game: this.game,
         x: pos,
-        y: 0,
-        asset: 'enemy'
+        y: -96,
+        asset: 'moto'
       })
     }
   }

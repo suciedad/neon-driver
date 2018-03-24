@@ -4,8 +4,8 @@ export default class extends Phaser.Sprite {
   constructor ({ game, x, y, asset }) {
     super(game, x, y, asset)
 
-    this.height = 95
-    this.width = 40
+    this.height = 96
+    this.width = 42
     this.speed = 0
     this.enemyPosition = "center"
 

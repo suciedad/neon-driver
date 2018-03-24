@@ -16,7 +16,7 @@ export default class extends Phaser.State {
     this.load.image('car', 'assets/images/car.png')
     this.load.image('mushroom', 'assets/images/mushroom2.png')
     this.load.image('road', 'assets/images/road.png')
-    this.load.image('enemy', 'assets/images/enemy_truck.png')
+    this.load.image('moto', 'assets/images/moto.png')
     this.load.image('truck', 'assets/images/truck.png')
     this.load.image('coin', 'assets/images/coin.png')
   }
